@@ -56,8 +56,8 @@ frontend/
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
-   cd frontend
+   git clone <https://github.com/shailendra7518/pre-test-assignment.git>
+   cd client
    ```
 
 2. Install dependencies:
@@ -74,7 +74,7 @@ frontend/
   npm run dev
   ```
 
-- Open [http://localhost:3000](http://localhost:3000) to view the app in the browser.
+- Open [http://localhost:5173](http://localhost:5173) to view the app in the browser.
 
 ### Build
 
@@ -86,4 +86,168 @@ frontend/
 
 ---
 
-Feel free to customize this template further based on your specific project details and requirements.
+
+
+Here is the README file for the backend of your project:
+
+---
+
+# Educational Content Dashboard - Backend
+
+This project is the backend for a responsive educational content dashboard. It is built using Node.js and Express and provides RESTful APIs for user authentication, retrieving courses, and submitting answers to questions.
+
+## Features
+
+- **User Authentication**: Login functionality.
+- **Course Retrieval**: APIs to get the list of available courses.
+- **Answer Submission**: Mock functionality to receive answers and return a success message.
+- **Database**: Stores user details and a list of courses using PostgreSQL or MongoDB.
+
+## Technologies Used
+
+- Node.js
+- Express
+- MongoDB/PostgreSQL
+- JWT for authentication
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js installed on your machine
+- MongoDB or PostgreSQL database setup
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <https://github.com/shailendra7518/pre-test-assignment.git>
+cd <server>
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory and add the following variables:
+
+```env
+PORT=3000
+DATABASE_URL=<your-database-url>
+JWT_SECRET=<your-jwt-secret>
+```
+
+### Running the Server
+
+Start the server by running:
+
+```bash
+npm run dev
+```
+
+The server will run on `http://localhost:3000`.
+
+## API Documentation
+
+### User Authentication
+
+#### Login
+
+- **URL**: `/api/auth/login`
+- **Method**: `POST`
+- **Body**:
+  ```json
+  {
+    "email": "user@example.com",
+    "password": "password"
+  }
+  ```
+
+### Courses
+
+#### Get All Courses
+
+- **URL**: `/api/courses`
+- **Method**: `GET`
+- **Headers**:
+  ```json
+  {
+    "Authorization": "Bearer <token>"
+  }
+  ```
+
+### Answers
+
+#### Submit Answer
+
+- **URL**: `/api/courses/:courseId/submit`
+- **Method**: `POST`
+- **Body**:
+  ```json
+  {
+    "questionId": "questionId",
+    "answer": "answer"
+  }
+  ```
+- **Headers**:
+  ```json
+  {
+    "Authorization": "Bearer <token>"
+  }
+  ```
+
+#### Get All Answers
+
+- **URL**: `/api/courses/answers`
+- **Method**: `GET`
+- **Headers**:
+  ```json
+  {
+    "Authorization": "Bearer <token>"
+  }
+  ```
+
+## Database Schema
+
+### Users
+
+- `userId` (String)
+- `email` (String)
+- `password` (String)
+
+### Courses
+
+- `courseId` (String)
+- `title` (String)
+- `description` (String)
+
+### Answers
+
+- `answerId` (String)
+- `userId` (String)
+- `courseId` (String)
+- `questionId` (String)
+- `answer` (String)
+
+## Example Queries
+
+### Create a User
+
+```sql
+INSERT INTO users (userId, email, password) VALUES ('1', 'user@example.com', 'password');
+```
+
+### Get All Courses
+
+```sql
+SELECT * FROM courses;
+```
+
+## Submission
+
+Provide a GitHub repository link containing all the code, documentation, and additional resources.
+
+---
