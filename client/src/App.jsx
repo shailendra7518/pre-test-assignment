@@ -10,7 +10,7 @@ import Signup from "./components/SignUp";
 import PrivateRoute from "./routes/privateRoute";
 const App = () => {
   const  {token}  = useSelector((state) => state.auth);
-  console.log(token)
+
 
   return (
     <ChakraProvider>

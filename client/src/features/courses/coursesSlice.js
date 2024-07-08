@@ -27,7 +27,7 @@ const coursesSlice = createSlice({
       state.error = action.payload;
     },
     submitAnswersSuccess(state, action) {
-      state.submissionMessage = action.payload.message;
+      state.answers=[...state.answers,action.payload]
     },
     submitAnswersFailure(state, action) {
       state.error = action.payload;

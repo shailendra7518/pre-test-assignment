@@ -27,7 +27,7 @@ const LoginPage = () => {
         email,
         password,
       });
-      console.log(response)
+    
       
       dispatch(loginSuccess(response?.data))
       navigate("/dashboard");

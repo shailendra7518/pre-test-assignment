@@ -12,7 +12,9 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios"; // Import axios for API calls
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllAnswersSuccess } from "../features/courses/coursesSlice";
+import { fetchAllAnswersSuccess, submitAnswersSuccess } from "../features/courses/coursesSlice";
+import { jwtDecode } from "jwt-decode";
+import { getToken } from "../utils";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 const CourseDetail = () => {
   const toast = useToast();
@@ -22,10 +24,7 @@ const CourseDetail = () => {
   );
   const { user } = useSelector((state) => state.auth);
   const [answer, setAnswer] = useState("");
-
-  useEffect(() => {
-    fetchAllAnswers(); // Initial fetch of answers when component mounts
-  }, []); // Dependency on answers state to re-fetch when answers change
+ // Dependency on answers state to re-fetch when answers change
 
   const fetchAllAnswers = async () => {
     try {
@@ -67,19 +66,24 @@ const CourseDetail = () => {
         isClosable: true,
         position: "top",
       });
-      dispatch({ type: "courses/submitAnswers/fulfilled", payload: response.data }); // Dispatch action to update submission message
+      dispatch(submitAnswersSuccess(response.data)); 
     } catch (error) {
       console.error("Error submitting answer:", error);
       // Handle error as per your application's requirements
     }
   };
 
+  
+  useEffect(() => {
+    fetchAllAnswers(); // Initial fetch of answers when component mounts
+  }, [handleSubmit]);
   function isSubmitted(questionId) {
-    console.log(user,questionId,selectedCourse)
+    
     // Check if there's any answer with matching userId, questionId, and courseId
+    const userDetail = jwtDecode(getToken())
     return answers.some(
       (answer) =>
-        answer.userId === user?.userId &&
+        answer.userId === userDetail?.userId &&
         answer.questionId === questionId &&
         answer.courseId === selectedCourse?._id
     );
